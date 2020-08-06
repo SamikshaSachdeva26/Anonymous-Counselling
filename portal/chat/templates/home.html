@@ -1,19 +1,62 @@
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>homepage</title>
+  <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Anton|Heebo|Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'home/css/home.css' %}">
+  <!-- <script src="{% static 'home/js/home.js' %}" defer></script> -->
+</head>
+<body>
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <a href="{% url 'update' %}">update</a>
-  <a href="{% url 'Recent' %}">Give me a student</a>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
-  <a href="{% url 'signup' %}">signup</a>
-    <div>
-        <a href="{% url 'studentCounselling' %}">I want to talk</a>
+<div>
+
+    <div style="padding-top:45px;padding-left:45%;font-size:35px;">
+    <b>Hi {{ user.username }} !!</b>
+      <button onclick="location.href = '{% url 'counsellor' %}';" type="button" class="btn btn-info btn-sm"
+              style="float:right;margin-right:42px;width:280px;height:54px;font-size:20px;">
+        Go to account</button>
+  </div>
+  <div class="centered">
+      <div class="card" style="width: 18rem; opacity:0.9;">
+        <div class="card-body">
+          <h5 class="card-title">Please proceed to your account for any waiting student</h5>
+          <button style="opacity:1;" onclick="location.href = '{% url 'counsellor' %}';" type="button" class="btn btn-primary">Proceed</button>
+        </div>
+      </div>
     </div>
+
+</div>
+
+{% else %}
+  <div>
+  <div class="centered1">
+    <hr size="30">
+    <h1 id="sam">Anonymous Counselling Portal</h1>
+    <hr size="30">
+  </div>
+
+    <div class="centered">
+      <div class="card" style="width: 18rem; opacity:0.9;">
+        <div class="card-body">
+          <h5 class="card-title">I want to talk</h5>
+          <button style="opacity:1;" onclick="location.href = '{% url 'student' %}';" type="button" class="btn btn-primary">Proceed</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:right;padding-top:45px;">
+      <button onclick="location.href = '{% url 'login' %}';" type="button" class="btn btn-info btn-sm"
+              style="margin-right:42px;width:280px;height:54px;font-size:20px;">
+        Login as Counselor</button>
+    </div>
+</div>
 {% endif %}
-{% endblock %}
+</body>
+</html>
